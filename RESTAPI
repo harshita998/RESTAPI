@@ -24,7 +24,7 @@ public static void main(String[] args)
          stmt.executeUpdate(sql);
          System.out.println("Created table in given database...");
 	int n;
-	while(n!=4)
+	while(1)
 	{
 		System.out.println("Enter Your Choice \n 1 for insert new record \n 2 for show table data \n 3 for delete record \n 4 for exit");
 		n=sc.nextInt();
