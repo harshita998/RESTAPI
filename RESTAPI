@@ -5,8 +5,8 @@ import java.sql.Statement;
 
 public class SQLI{
  static final String DB_URL = "jdbc:mysql://localhost:3333/";
-   static final String USER = "kuldeep";
-   static final String PASS = "kkkumawat";
+   static final String USER = "Harshita";
+   static final String PASS = "Raghuvanshi";
 public static void main(String[] args)
 {   
 	Scanner sc=new Scanner(System.in);
