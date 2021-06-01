@@ -51,7 +51,8 @@ public static void main(String[] args)
 				break;
 			case 4:
 				System.out.println("Thanks");
-				break;
+				exit();
+				int z =sc.next int();
 			default:
 				System.out.println("Incorrect Input");
 		}		
