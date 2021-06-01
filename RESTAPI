@@ -1,0 +1,88 @@
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.sql.Statement;
+
+public class SQLI{
+ static final String DB_URL = "jdbc:mysql://localhost:3333/";
+   static final String USER = "kuldeep";
+   static final String PASS = "kkkumawat";
+public static void main(String[] args)
+{   
+	Scanner sc=new Scanner(System.in);
+	try(Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);Statement stmt = conn.createStatement();) 
+	{		      
+         String sql = "CREATE DATABASE STUDENTS";
+         stmt.executeUpdate(sql);
+         System.out.println("Database created successfully...");
+	String sql = "CREATE TABLE Student " +
+                   "(id INTEGER not NULL, " +
+                   " name VARCHAR(255), " + 
+                   " age INTEGER, " + 
+                   " class VARCHAR(255), " + 
+                   " PRIMARY KEY ( id ))"; 
+         stmt.executeUpdate(sql);
+         System.out.println("Created table in given database...");
+	int n;
+	while(n!=4)
+	{
+		System.out.println("Enter Your Choice \n 1 for insert new record \n 2 for show table data \n 3 for delete record \n 4 for exit");
+		n=sc.nextInt();
+		switch(n)
+		{
+			case 1:
+				System.out.println("Enter ID");
+				int id=sc.nextInt();
+				System.out.println("Enter Name");
+				String name=sc.next();
+				System.out.println("Enter Age");
+				int age=sc.next();
+				System.out.println("Enter Class");
+				String class=sc.next();
+				InsertNew(id,name,age,class);
+				break;
+			case 2:
+				display();
+				break;
+			case 3:
+				System.out.println("Enter ID");
+				int did=sc.nextInt();
+`				deleteone(did);
+				break;
+			case 4:
+				System.out.println("Thanks");
+				break;
+			default:
+				System.out.println("Incorrect Input");
+		}		
+	}     	  
+      } catch (SQLException e) {
+         e.printStackTrace();
+      } 
+}
+public void InsertNew(int id,String name,int age,String class)
+{
+	String sql = "INSERT INTO Student VALUES ("+id+", '"+name+"', '"+age+',+"+class+")";
+	 stmt.executeUpdate(sql);
+	System.out.println("Data Insertrd");
+}
+public void display(){
+	ResultSet rs = stmt.executeQuery("select * from student");    
+  System.out.println("id  name  age  class");      
+while (rs.next())    
+  {    
+   int id = rs.getInt("id");    
+   String name = rs.getString("name");    
+   int age = rs.getInt("age");    
+   String class = rs.getString("class");
+   System.out.println(id + "   " + name + " " + age +" "+class);    
+  }    
+}
+public void deleteone(int did)
+{
+	String sql = "DELETE FROM student " +
+            "WHERE id = "+did;
+         stmt.executeUpdate(sql);
+	  System.out.println("Record Deleted");    
+}
+}
